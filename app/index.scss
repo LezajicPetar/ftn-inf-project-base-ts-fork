@@ -1,1 +1,33 @@
-@import './styles/global';
+@use './styles/_variables' as *;
+@use './styles/global';
+
+table {
+    border: 2px solid black;
+    border-collapse: collapse;
+    margin: 50px 50px 0px 50px;
+
+    tr:hover {
+        background-color: rgb(174, 172, 172);
+    }
+
+    th,
+    td {
+        border: 2px solid black;
+        padding: 10px;
+    }
+
+}
+
+button {
+    margin-left: 50px;
+    background-color: $primary-color;
+    color: $text-color;
+    padding: 10px;
+    font-weight: bold;
+    border: none;
+
+    &:hover {
+        background-color: $secondary-color;
+        color: $primary-color
+    }
+}

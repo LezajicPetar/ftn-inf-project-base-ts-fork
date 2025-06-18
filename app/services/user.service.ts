@@ -12,15 +12,37 @@ export class UserService {
             .then(response => {
                 if (!response.ok) {
                     return response.text().then(errorMessage => {
-                        throw { status: response.status, message: errorMessage}
+                        throw { status: response.status, message: errorMessage }
                     })
                 }
                 return response.json();
-            }).then((users)=> {
+            }).then((users) => {
                 return users.data as User[];
             }).catch(error => {
                 console.error('Error', error.status)
                 throw error;
             })
-        }
+    }
+
+    add(user: User): Promise<User> {
+
+        console.log(user)
+        return fetch(this.apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        }).then(response => {
+            if (!response.ok) {
+                return response.text().then(errorMessage => {
+                    throw { status: response.status, message: errorMessage }
+                })
+            }
+            return response.json()
+        }).then((user: User)=> {
+            return user
+        }).catch(error => {
+            console.error('Error', error.status)
+            throw error
+        });
+    }
 }
