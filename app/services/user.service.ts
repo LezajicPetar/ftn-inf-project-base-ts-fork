@@ -24,6 +24,23 @@ export class UserService {
             })
     }
 
+    getById(id: number): Promise<User>{
+        return fetch(`${this.apiUrl}/${id}`)
+        .then(response => {
+            if(!response.ok){
+                return response.text()
+            }
+            return response.json();
+        })
+        .then((user:User) =>{
+            return user;
+        })
+        .catch(error => {
+            console.error('Error', error.status)
+            throw error;
+        });
+    }
+    
     add(user: User): Promise<User> {
 
         console.log(user)
