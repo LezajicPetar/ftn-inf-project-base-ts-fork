@@ -28,7 +28,9 @@ export class UserService {
         return fetch(`${this.apiUrl}/${id}`)
             .then(response => {
                 if (!response.ok) {
-                    return response.text()
+                    return response.text().then(errorMessage => {
+                        throw { status: response.status, message: errorMessage }
+                    })
                 }
                 return response.json();
             })
@@ -46,19 +48,21 @@ export class UserService {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
         })
-        .then(response => {
-            if(!response.ok){
-                return response.text
-            }
-            return response.json();
-        })
-        .then((user: User) => {
-            return user;
-        })
-        .catch(error => {
-            console.error('Error', error.status)
-            throw error;
-        });
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorMessage => {
+                        throw { status: response.status, message: errorMessage }
+                    })
+                }
+                return response.json();
+            })
+            .then((user: User) => {
+                return user;
+            })
+            .catch(error => {
+                console.error('Error', error.status)
+                throw error;
+            });
     }
     add(user: User): Promise<User> {
 
@@ -79,6 +83,22 @@ export class UserService {
         }).catch(error => {
             console.error('Error', error.status)
             throw error
+        });
+    }
+
+    delete(id: number): Promise<void> {
+        return fetch(`${this.apiUrl}/${id}`, {
+            method: 'DELETE'
+        }).then(response => {
+            if (!response.ok) {
+                return response.text().then(errorMessage => {
+                    throw { status: response.status, message: errorMessage }
+                })
+            }
+            return;
+        }).catch(error => {
+            console.error('Error', error.status)
+            throw error;
         });
     }
 }

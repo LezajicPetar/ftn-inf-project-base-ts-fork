@@ -22,6 +22,7 @@ function initialize() {
         const formData : FormData = new FormData(form);
         
         const user: User = {
+            id: Number(userId),
             ime: formData.get("ime") as string,
             prezime: formData.get("prezime") as string,
             username: formData.get("username") as string,

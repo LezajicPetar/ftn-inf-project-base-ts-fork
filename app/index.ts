@@ -16,11 +16,17 @@ function loadTable() {
                         <td>${user.prezime}</td>
                         <td>${user.username}</td>
                         <td>${user.datumRodjenja}</td>
-                        <td><button type='button' class='izmeniBtn'>IZMENI</button></td>`
+                        <td><button type='button' class='izmeniBtn'>IZMENI</button></td>
+                        <td><button type='button' class='obrisiBtn'>OBRISI</button></td>`
 
-            const izmeniBtn = tr.querySelector("button")
+            const izmeniBtn = tr.querySelector(".izmeniBtn")
             izmeniBtn.addEventListener("click", () => {
                 window.location.href = `editUserPage/editUser.html?id=${user.id}`
+            })
+            const obrisiBtn = tr.querySelector(".obrisiBtn")
+            obrisiBtn.addEventListener("click", () => {
+                userService.delete(user.id);
+                window.location.reload();
             })
             
             tBody.appendChild(tr)
