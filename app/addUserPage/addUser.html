@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <div id="spinner"></div>
 
     <header>
         <h1>DODAVANJE KORISNIKA</h1>
@@ -24,8 +25,13 @@
         <input type="text" id="username" name="username" placeholder="Vula305" required>
         <label for="datumRodjenja">Datum rodjenja:</label>
         <input type="date" id="datumRodjenja" name="datumRodjenja" required>
-        <button type="button">DODAJ KORISNIKA</button>
+        <div id="tooltip-wrapper">
+            <button type="button">DODAJ KORISNIKA</button>
+            <span id="tooltip-text">Cuva unete podatke u bazi podataka</span>
+        </div>
+
     </form>
+    <span id="error-message">Dogodila se greska pokusajte ponovo!</span>
 
 </body>
 

@@ -26,7 +26,7 @@ function loadTable() {
             const obrisiBtn = tr.querySelector(".obrisiBtn")
             obrisiBtn.addEventListener("click", () => {
                 userService.delete(user.id);
-                window.location.reload();
+                tr.remove();
             })
             
             tBody.appendChild(tr)
